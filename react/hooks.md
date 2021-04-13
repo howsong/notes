@@ -7,7 +7,7 @@
 ### useMemo 
 > 缓存计算结果数据
 ### useCallback 
-> 实现原理和useMemo，返回值是函数
+> 实现原理和useMemo，不过其返回值是函数
 
 ### useEffect 
 > 用于处理函数的副作用
@@ -25,6 +25,7 @@ useEffect(()=>{
 > 和useEffect使用原理一样，如果逻辑涉及到操作dom时就需要用到useLayoutEffect
 
 ### useContext
+> 可以基于useContext和useReducer实现类似redux的功能
 ### useDebugValue
 > useDebugValue 接受一个格式化函数作为可选的第二个参数。该函数只有在 Hook 被检查时才会被调用。它接受 debug 值作为参数，并且会返回一个格式化的显示值。
 ### useImperativeHandle
@@ -34,6 +35,7 @@ useEffect(()=>{
 ### 为什么要用react hooks
 react hooks
 - 代码更加简洁
+- 可以基于基础的hooks, 脱离组件抽离出纯逻辑结构
 class 
 - 业务逻辑揉在生命周期里面，不利于逻辑复用
 
