@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS事件模型</title>
+  <style>
+    .box1 {
+      width: 600px;
+      height: 600px;
+      background-color: blueviolet;
+      cursor: pointer;
+    }
+
+    .box2 {
+      width: 300px;
+      height: 300px;
+      background-color: orange;
+      cursor: pointer;
+    }
+
+    .box3 {
+      width: 150px;
+      height: 150px;
+      background-color: aqua;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>1、DOM0级事件模型</h3>
+  <div class="">
+    <p>
+      <button onclick="console.log('DOM0级事件模型, 直接写在元素属性上')">DOM0级事件模型, 直接写在元素属性上</button>
+    </p>
+    <p>
+      <button id="dom0-1">DOM0级事件模型, 获取元素然后添加事件</button>
+    </p>
+  </div>
+  <h3>2、DOM2级事件模型</h3>
+  <div class="box1" id="box1">
+    box1
+    <div class="box2" id="box2">
+      box2
+      <div class="box3" id="box3">box3</div>
+    </div>
+  </div>
+  <script>
+    const dom01Btn = document.getElementById('dom0-1')
+    dom01Btn.onclick = function () {
+      console.log('DOM0级事件模型, 获取元素然后添加事件')
+    }
+    const box1 = document.querySelector('#box1'),
+      box2 = document.querySelector('#box2'),
+      box3 = document.querySelector('#box3')
+
+    function box3SayHelloCatch() {
+      console.log('你好啊，我是box3! --------- 绑定到事件捕获阶段')
+    }
+    function box3SayHello() {
+      console.log('你好啊，我是box3! --------- 绑定到事件冒泡阶段')
+    }
+    // 绑定到事件捕获阶段
+    box3.addEventListener('click', box3SayHelloCatch, true)
+    // 绑定到事件冒泡阶段
+    box3.addEventListener('click', box3SayHello, false)
+    box3.addEventListener('click', function () { console.log('tttttt') }, false) // addEventListener可以绑定多个事件
+    box1.addEventListener('click', function () {
+      console.log('box1 事件冒泡')
+    }, false)
+    box1.addEventListener('click', function () {
+      console.log('box1 事件捕获')
+    }, true)
+    
+  </script>
+</body>
+
+</html>
