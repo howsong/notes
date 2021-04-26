@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>节流和防抖</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      margin: 20px auto;
+      width: 400px;
+    }
+
+    .conuter_box {
+      width: 400px;
+      height: 200px;
+      background-color: lightcyan;
+      line-height: 200px;
+      font-size: 50px;
+      border: 1px solid #ccc;
+      color: #222;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h3>1、不使用节流和防抖直接触发onmousemove</h3>
+    <div class="conuter_box" id="counter">
+      0
+    </div>
+    <h3>2、防抖触发onmousemove</h3>
+    <div class="conuter_box" id="counter1">
+      0
+    </div>
+    <h3>3、节流触发onmousemove</h3>
+    <div class="conuter_box" id="counter2">
+      0
+    </div>
+  </div>
+  <script>
+    function debounce(func, wait) {
+      let timeout;
+      return function () {
+        let context = this;
+        let args = arguments;
+
+        if (timeout) clearTimeout(timeout);
+
+        timeout = setTimeout(() => {
+          func.apply(context, args)
+        }, wait);
+      }
+    }
+    function throttle(func, wait) {
+      let timeout;
+      return function () {
+        let context = this;
+        let args = arguments;
+        if (!timeout) {
+          timeout = setTimeout(() => {
+            timeout = null;
+            func.apply(context, args)
+          }, wait)
+        }
+
+      }
+    }
+    let n = 0,
+      n1 = 0,
+      n2 = 0
+    const counter = document.querySelector('#counter'),
+      counter1 = document.querySelector('#counter1'),
+      counter2 = document.querySelector('#counter2')
+    function count() {
+      counter.innerHTML = n++;
+    };
+    function count1() {
+      counter1.innerHTML = n1++;
+    };
+    function count2() {
+      counter2.innerHTML = n2++;
+    };
+    counter.onmousemove = count;
+    counter1.onmousemove = debounce(count1, 300);
+    counter2.onmousemove = throttle(count2, 300);
+  </script>
+</body>
+
+</html>

@@ -108,3 +108,5 @@ type ExcludeKeys = Exclude<keyof Worker, keyof Student>
 type ExtractKeys = Exclude<keyof Worker, keyof Student>
 // 'name' | 'age' | 'email' | 'grade'
 ```
+
+### &
