@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cors跨域解决方案</title>
+  <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+</head>
+
+<body>
+  <div>
+    <button onclick="getCorsData();">请求数据</button>
+  </div>
+  <script type="text/javascript">
+    function getCorsData() {
+      $.ajax({
+        url: 'http://localhost:8080/api/cors/list', 
+        method: 'post', 
+        data: { word: 'TEST' }, 
+        success: function (res) {
+          console.log(res,'------------')
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>
