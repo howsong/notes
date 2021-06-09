@@ -3,6 +3,35 @@
 ### useReducer 
 > 多个状态合并成对象来管理
 ### useRef
+- 父组件调用子组件的方法
+```js
+import React, { useRef } from 'react'
+const Child = ()=>{
+    const fn = ()=>{
+        console.og('调用子组件方法')
+    }
+    useImperativeHandle(cRef, () => {
+        return {
+            childFn1: fn1
+        }
+    })
+    return (
+        <div></div>
+    )
+}
+const Parent = ()=>{
+    const childRef = useRef()
+    return (
+        <div>
+            <button onClick={()=>{
+                childRef.current.childFn1()
+            }}>调用子组件方法</button>
+            <Child cRef={childRef} />
+        </div>
+    )
+}
+
+```
 
 ### useMemo 
 > 缓存计算结果数据

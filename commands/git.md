@@ -96,4 +96,10 @@ chore：构建过程或辅助工具的变动
 - `git reset --force/--soft [版本号]`: --force删除提交的commit记录，--soft commit记录会保留
 - `git push origin [branch] --froce` 提交代码 
 
+### 2、gitlab生成SSH key
+- 生成key `ssh-keygen -t rsa -C "邮箱地址" -b 4096`
+- 复制
+  - mac pbcopy < ~/.ssh/id_rsa.pub 
+  - GNU/Linux xclip -sel clip < ~/.ssh/id_rsa.pub
+  - Windows type %userprofile%\.ssh\id_rsa.pub | clip 或 cat ~/.ssh/id_rsa.pub | clip
 
