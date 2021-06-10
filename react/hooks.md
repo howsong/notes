@@ -5,32 +5,37 @@
 ### useRef
 - 父组件调用子组件的方法
 ```js
-import React, { useRef } from 'react'
-const Child = ()=>{
-    const fn = ()=>{
-        console.og('调用子组件方法')
+import React, { useImperativeHandle, useRef } from 'react'
+interface ChildProps {
+  name: string
+  cRef?: any
+}
+const Child: React.FC<ChildProps> = ({ cRef }) => {
+  const fn1 = (type: string) => {
+    console.log('子组件方法', type)
+  }
+  useImperativeHandle(cRef, () => {
+    return {
+      childFn1: fn1
     }
-    useImperativeHandle(cRef, () => {
-        return {
-            childFn1: fn1
-        }
-    })
-    return (
-        <div></div>
-    )
+  })
+  return (
+    <div style={{ border: '1px solid #ccc' }}>
+      <h3>我是child</h3>
+    </div>
+  )
 }
-const Parent = ()=>{
-    const childRef = useRef()
-    return (
-        <div>
-            <button onClick={()=>{
-                childRef.current.childFn1()
-            }}>调用子组件方法</button>
-            <Child cRef={childRef} />
-        </div>
-    )
-}
+const Parent = () => {
+  const childRef = useRef()
 
+  return (
+    <div style={{ border: '1px solid #ccc' }}>
+      <h1>我是Parent</h1>
+      <button onClick={() => console.log(childRef)}>Parent调用Child方法</button>
+      <Child cRef={childRef} name="jjjj" />
+    </div>
+  )
+}
 ```
 
 ### useMemo 
